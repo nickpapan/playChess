@@ -2,7 +2,8 @@ import chess
 import Chess_utils
 import chess.engine
 
-#ela re dike mou
+
+
 
 
 
@@ -15,6 +16,7 @@ limit = chess.engine.Limit(time=2.0)
 print(board)
 print("Whites turn")
 chess.Color = False
+
 while Chess_utils.continue_playing(board):
 
 
@@ -40,6 +42,7 @@ while Chess_utils.continue_playing(board):
 
 
     print(board)
+    Chess_utils.check_to_queen(board)
 
 
     if chess.Color:

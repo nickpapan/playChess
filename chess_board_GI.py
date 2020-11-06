@@ -30,11 +30,31 @@ def chess_b_gi():
     load_images()
     draw_game_state(screen, gs)
     running = True
+    sqSelected = ()
+    playerClicks = []
 
     while running:
         for e in p.event.get():
             if e.type == p.QUIT:
                 running = False
+            elif e.type == p.MOUSEBUTTONDOWN:
+                location = p.mouse.get_pos()
+                col = location[0]// square_size
+                row = location[1]// square_size
+                if sqSelected == (row, col):
+                    sqSelected = ()
+                    playerClicks = []
+                else:
+                    sqSelected = (row, col)
+                    playerClicks.append(sqSelected)
+                if len(playerClicks) == 2:
+                    move = GameState.Move(playerClicks[0], playerClicks[1], gs.board)
+                    print(move.getChessNotation())
+                    gs.makeMove(move)
+                    sqSelected = ()
+                    playerClicks = []
+
+
         draw_game_state(screen, gs)
         clock.tick(MAX_FPS)
         p.display.flip()
